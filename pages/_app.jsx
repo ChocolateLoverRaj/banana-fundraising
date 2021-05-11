@@ -1,9 +1,15 @@
 import "./global.less";
+import { Header } from "../components";
 
 const App = (props) => {
   const { Component, pageProps } = props;
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Header />
+      <Component {...pageProps} />
+    </>
+  );
 };
 
 export default App;

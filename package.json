@@ -8,6 +8,7 @@
     "post-update": "yarn upgrade --latest"
   },
   "dependencies": {
+    "@ant-design/icons": "4.6.2",
     "antd": "4.15.5",
     "less": "4.1.1",
     "less-loader": "8.1.1",
