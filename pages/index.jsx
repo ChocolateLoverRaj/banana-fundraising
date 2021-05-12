@@ -3,7 +3,7 @@ import { Button } from "antd";
 const IndexPage = () => {
   return (
     <>
-      <Button type="primary">Button</Button>
+      <Button>Button</Button>
     </>
   );
 };
