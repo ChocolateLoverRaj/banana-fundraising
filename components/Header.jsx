@@ -25,9 +25,11 @@ const Header = () => {
           />
         }
       >
+        {/* eslint-disable-next-line */}
         <a
           href="https://sites.google.com/pewaukeeschools.org/banana-custom-apps/home"
           target="_blank"
+          rel="noreferrer"
         />
       </Menu.Item>
       <Menu.Item key="/">Banana Fundraising</Menu.Item>
