@@ -1,7 +1,40 @@
 import GoogleButton from "react-google-button";
-import { Row, Col, Form, Input, Button } from "antd";
+import { Row, Col, Form, Input, Button, notification } from "antd";
+import { useEffect, useState } from "react";
 
 const TeachersPage = () => {
+  const [loginReq, setLoginReq] = useState();
+
+  useEffect(() => {
+    /* eslint-disable-next-line */
+    loginReq
+      ?.then(async (res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          console.log(await res.json());
+        } else {
+          notification.error({
+            message: "Error Logging In",
+            description: "Your email address is not part of a Google Workspace."
+          });
+        }
+        setLoginReq(undefined);
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Error logging in");
+      });
+  }, [loginReq]);
+
+  const handleFinish = ({ email }) => {
+    setLoginReq(
+      fetch("/api/login", {
+        method: "POST",
+        body: email
+      })
+    );
+  };
+
   return (
     <>
       <Row align="middle">
@@ -18,16 +51,16 @@ const TeachersPage = () => {
       </Row>
       <Row align="middle">
         <Col span={12}>
-          <Form>
+          <Form onFinish={handleFinish}>
             <Form.Item
               name="email"
               label="Email"
               rules={[{ type: "email" }, { required: true }]}
             >
-              <Input />
+              <Input disabled={loginReq} />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button loading={loginReq} type="primary" htmlType="submit">
                 Login
               </Button>
             </Form.Item>
