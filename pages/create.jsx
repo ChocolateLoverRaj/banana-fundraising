@@ -1,9 +1,8 @@
-import { Steps } from "antd";
+import { Steps, notification } from "antd";
 import {
   UserOutlined,
   SettingOutlined,
-  CheckCircleOutlined,
-  notification
+  CheckCircleOutlined
 } from "@ant-design/icons";
 import useLocalStorage from "../helpers/useLocalStorage";
 import { useRouter } from "next/router";
