@@ -1,9 +1,13 @@
 import GoogleButton from "react-google-button";
 import { Row, Col, Form, Input, Button, notification } from "antd";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import useLocalStorage from "../helpers/useLocalStorage";
 
 const TeachersPage = () => {
   const [loginReq, setLoginReq] = useState();
+  const router = useRouter();
+  const [setEmail, deleteEmail] = useLocalStorage("email").slice(1);
 
   useEffect(() => {
     /* eslint-disable-next-line */
@@ -11,11 +15,15 @@ const TeachersPage = () => {
       ?.then(async (res) => {
         console.log(res.status);
         if (res.status === 200) {
-          console.log(await res.json());
+          const role = await res.json();
+          if (role === "admin") router.replace("/create");
         } else {
+          deleteEmail();
           notification.error({
             message: "Error Logging In",
-            description: "Your email address is not part of a Google Workspace."
+            description:
+              "Your email address is not part of a Google Workspace.",
+            duration: 10
           });
         }
         setLoginReq(undefined);
@@ -24,9 +32,10 @@ const TeachersPage = () => {
         console.log(e);
         alert("Error logging in");
       });
-  }, [loginReq]);
+  }, [loginReq, router, deleteEmail]);
 
   const handleFinish = ({ email }) => {
+    setEmail(email);
     setLoginReq(
       fetch("/api/login", {
         method: "POST",
