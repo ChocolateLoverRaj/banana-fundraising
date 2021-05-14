@@ -1,4 +1,4 @@
-import { Steps, notification } from "antd";
+import { Steps, notification, Row, Col, Form, Checkbox, Button } from "antd";
 import {
   UserOutlined,
   SettingOutlined,
@@ -7,6 +7,7 @@ import {
 import useLocalStorage from "../helpers/useLocalStorage";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { TosInput } from "../components";
 
 const { Step } = Steps;
 
@@ -22,15 +23,46 @@ const CreatePage = () => {
       });
       router.replace("/login");
     }
-    alert(email);
   }, [email, router]);
 
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
-    <Steps current={1}>
-      <Step icon={<UserOutlined />} title="Login" />
-      <Step icon={<SettingOutlined />} title="Setup Route" />
-      <Step icon={<CheckCircleOutlined />} title="Finish" />
-    </Steps>
+    <>
+      <Steps current={1}>
+        <Step icon={<UserOutlined />} title="Login" />
+        <Step icon={<SettingOutlined />} title="Setup" />
+        <Step icon={<CheckCircleOutlined />} title="Finish" />
+      </Steps>
+      <Row justify="space-around">
+        <Col>
+          <Form initialValues={{ tos: false }} onFinish={handleSubmit}>
+            <Form.Item label="Teachers">
+              The real website would use the Google Workspace API, but the
+              school has disabled Google Cloud.
+            </Form.Item>
+            <Form.Item
+              label="I agree to the Terms of Service"
+              name="tos"
+              rules={[
+                {
+                  type: "enum",
+                  enum: [true],
+                  message: "You must agree to the Terms of Service"
+                }
+              ]}
+            >
+              <TosInput />
+            </Form.Item>
+            <Button type="primary" htmlType="submit">
+              Create Fundraiser
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </>
   );
 };
 
