@@ -164,11 +164,6 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
-"@rehooks/local-storage@2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@rehooks/local-storage/-/local-storage-2.4.1.tgz#a35bf8ea03d8bf2202029a7b5885ed2806a3594b"
-  integrity sha512-btOCPMDDG5PtNw+qNMTG9HGsgQTUYa3bvZ/ELDSeZ4YA9IGJA97oP6Tcb9EOrN7OqC8zpsiO7qxvpYP01PE+XQ==
-
 "@types/node@*":
   version "15.0.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-15.0.2.tgz#51e9c0920d1b45936ea04341aa3e2e58d339fb67"
@@ -2679,6 +2674,11 @@ react-refresh@0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
+
+react-use-localstorage@3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/react-use-localstorage/-/react-use-localstorage-3.5.3.tgz#c4bcc097859a2d2879e969f0a57b16345905df82"
+  integrity sha512-1oNvJmo72G4v5P9ytJZZTb6ywD3UzWBiainTtfbNlb+U08hc+SOD5HqgiLTKUF0MxGcIR9JSnZGmBttNLXaQYA==
 
 react@17.0.2:
   version "17.0.2"

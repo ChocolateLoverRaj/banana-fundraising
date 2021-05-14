@@ -1,5 +1,10 @@
-import { useState } from "react";
+import useLocalStorage from "react-use-localstorage";
 
-export default typeof window !== "undefined"
-  ? require("@rehooks/local-storage").useLocalStorage
-  : useState;
+const useSsrLocalStorage = (key, initial) => {
+  return typeof window === "undefined"
+    ? [initial, (value) => undefined]
+    : // eslint-disable-next-line
+      useLocalStorage(key, initial);
+};
+
+export default useSsrLocalStorage;
