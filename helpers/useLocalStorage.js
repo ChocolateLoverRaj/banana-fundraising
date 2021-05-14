@@ -1,4 +1,4 @@
-import useLocalStorage from "react-use-localstorage";
+import useLocalStorage from "use-local-storage";
 
 const useSsrLocalStorage = (key, initial) => {
   return typeof window === "undefined"
