@@ -7,7 +7,7 @@ import useLocalStorage from "../helpers/useLocalStorage";
 const TeachersPage = () => {
   const [loginReq, setLoginReq] = useState();
   const router = useRouter();
-  const [setEmail, deleteEmail] = useLocalStorage("email").slice(1);
+  const [setEmail] = useLocalStorage("email").slice(1);
 
   useEffect(() => {
     /* eslint-disable-next-line */
@@ -18,7 +18,7 @@ const TeachersPage = () => {
           const role = await res.json();
           if (role === "admin") router.replace("/create");
         } else {
-          deleteEmail();
+          setEmail(undefined);
           notification.error({
             message: "Error Logging In",
             description:
@@ -32,7 +32,7 @@ const TeachersPage = () => {
         console.log(e);
         alert("Error logging in");
       });
-  }, [loginReq, router, deleteEmail]);
+  }, [loginReq, router, setEmail]);
 
   const handleFinish = ({ email }) => {
     setEmail(email);
