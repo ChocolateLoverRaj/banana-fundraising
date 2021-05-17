@@ -2,7 +2,7 @@ import { Modal, Button } from "antd";
 import { CheckOutlined, ReadOutlined } from "@ant-design/icons";
 import { useState } from "react";
 const TosInput = (props) => {
-  const { value, onChange } = props;
+  const { value, onChange, disabled } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -27,6 +27,7 @@ const TosInput = (props) => {
   return (
     <>
       <Button
+        disabled={disabled}
         icon={value ? <CheckOutlined /> : <ReadOutlined />}
         onClick={handleOpen}
       >

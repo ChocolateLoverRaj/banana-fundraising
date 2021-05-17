@@ -1,13 +1,13 @@
 import GoogleButton from "react-google-button";
 import { Row, Col, Form, Input, Button, notification } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
-import useLocalStorage from "../helpers/useLocalStorage";
+import { GlobalContext } from "../helpers";
 
 const TeachersPage = () => {
   const [loginReq, setLoginReq] = useState();
   const router = useRouter();
-  const [setEmail] = useLocalStorage("email").slice(1);
+  const [setLogin] = useContext(GlobalContext).slice(1);
 
   useEffect(() => {
     /* eslint-disable-next-line */
@@ -15,10 +15,13 @@ const TeachersPage = () => {
       ?.then(async (res) => {
         console.log(res.status);
         if (res.status === 200) {
-          const role = await res.json();
-          if (role === "admin") router.replace("/create");
+          const { role, setupComplete } = await res.json();
+          setLogin((login) => ({ ...login, role }));
+          router.replace(
+            role === "admin" && !setupComplete ? "/create" : "/dashboard"
+          );
         } else {
-          setEmail(undefined);
+          setLogin(undefined);
           notification.error({
             message: "Error Logging In",
             description:
@@ -32,10 +35,10 @@ const TeachersPage = () => {
         console.log(e);
         alert("Error logging in");
       });
-  }, [loginReq, router, setEmail]);
+  }, [loginReq, router, setLogin]);
 
   const handleFinish = ({ email }) => {
-    setEmail(email);
+    setLogin({ email });
     setLoginReq(
       fetch("/api/login", {
         method: "POST",

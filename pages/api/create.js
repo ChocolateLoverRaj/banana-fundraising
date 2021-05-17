@@ -11,9 +11,10 @@ export default (req, res) => {
     return;
   }
   const role = getRole(email);
-  if (role === "none") {
+  if (role !== "admin") {
     res.status(403).end();
     return;
   }
-  res.json({ role, setupComplete: false });
+  console.log("need to connect to mongodb");
+  res.status(201).end();
 };

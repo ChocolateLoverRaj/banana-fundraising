@@ -1,14 +1,15 @@
 import "./global.less";
 import { Header } from "../components";
+import { GlobalContextProvider } from "../helpers";
 
 const App = (props) => {
   const { Component, pageProps } = props;
 
   return (
-    <div className="dark">
+    <GlobalContextProvider>
       <Header />
       <Component {...pageProps} />
-    </div>
+    </GlobalContextProvider>
   );
 };
 
