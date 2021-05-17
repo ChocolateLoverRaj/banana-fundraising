@@ -42,9 +42,12 @@ const Header = () => {
       <Menu.Item key="/">Banana Fundraising</Menu.Item>
       <Menu.Item key="/space" className={styles.space} />
       {login?.role !== undefined ? (
-        <Menu.Item key="logout" icon={<LogoutOutlined />}>
-          Logout
-        </Menu.Item>
+        <>
+          <Menu.Item key="/dashboard">Dashboard</Menu.Item>
+          <Menu.Item key="logout" icon={<LogoutOutlined />}>
+            Logout
+          </Menu.Item>
+        </>
       ) : (
         <Menu.Item key="/login" icon={<UserOutlined />}>
           Login

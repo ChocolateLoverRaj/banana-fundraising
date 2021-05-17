@@ -63,8 +63,15 @@ const TeachersPage = () => {
               <GoogleButton disabled />
             </Col>
             <Col span={12}>
-              The real website would be Google login based, but the school has
-              disabled Google Cloud.
+              The real website would be{" "}
+              <a
+                href="https://developers.google.com/identity/protocols/oauth2"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Google login based
+              </a>
+              , but the school has disabled Google Cloud.
             </Col>
           </Row>
           <Row justify="space-around" align="middle">

@@ -28,7 +28,9 @@ export default async (req, res) => {
     return;
   }
   await schools.insertOne({
-    id: demoId
+    id: demoId,
+    goal: 10000,
+    goalProgress: 0
   });
   res.status(201).end();
 };
