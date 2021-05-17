@@ -1,6 +1,8 @@
 import getRole from "../../helpers/getRole";
+import getDb from "../../helpers/db";
+import getId from "../../helpers/getId";
 
-export default (req, res) => {
+export default async (req, res) => {
   if (req.method !== "POST") {
     res.status(503).end();
     return;
@@ -15,6 +17,18 @@ export default (req, res) => {
     res.status(403).end();
     return;
   }
-  console.log("need to connect to mongodb");
+  const { db } = await getDb();
+  const demoId = await getId();
+  const schools = db.collection("schools");
+  const existing = await schools.findOne({
+    id: demoId
+  });
+  if (existing !== null) {
+    res.status(409).end();
+    return;
+  }
+  await schools.insertOne({
+    id: demoId
+  });
   res.status(201).end();
 };

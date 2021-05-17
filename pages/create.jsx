@@ -7,15 +7,14 @@ import {
 import useLocalStorage from "../helpers/useLocalStorage";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { TosInput } from "../components";
-import Link from "next/link";
+import { TosInput, DashboardButton } from "../components";
 const { Step } = Steps;
 
 const CreatePage = () => {
-  const [login] = useLocalStorage("login");
+  const [login, setLogin] = useLocalStorage("login");
   const router = useRouter();
   const [creating, setCreating] = useState();
-  const [created, setCreated] = useState(false);
+  const [created, setCreated] = useState(Boolean(login?.setupComplete));
 
   useEffect(() => {
     if (login === undefined) {
@@ -33,6 +32,7 @@ const CreatePage = () => {
         setCreating(undefined);
         if (res.status === 201) {
           setCreated(true);
+          setLogin((login) => ({ ...login, setupComplete: true }));
         } else {
           alert("Something went wrong");
         }
@@ -52,6 +52,8 @@ const CreatePage = () => {
     );
   };
 
+  console.log(created, +created, 1 + +created);
+
   return (
     <>
       <Steps current={1 + +created}>
@@ -65,11 +67,7 @@ const CreatePage = () => {
             <Result
               status="success"
               title="Fundraiser Sucessfully Created"
-              extra={[
-                <Button type="primary">
-                  <Link href="/dashboard">Go to dashboard</Link>
-                </Button>
-              ]}
+              extra={[<DashboardButton key="main" />]}
             />
           ) : (
             <Form initialValues={{ tos: false }} onFinish={handleSubmit}>

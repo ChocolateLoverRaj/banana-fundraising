@@ -1,6 +1,8 @@
 import getRole from "../../helpers/getRole";
+import getId from "../../helpers/getId";
+import getDb from "../../helpers/db";
 
-export default (req, res) => {
+export default async (req, res) => {
   if (req.method !== "POST") {
     res.status(503).end();
     return;
@@ -15,5 +17,14 @@ export default (req, res) => {
     res.status(403).end();
     return;
   }
-  res.json({ role, setupComplete: false });
+  const schoolId = await getId();
+  const { db } = await getDb();
+  const setupComplete =
+    role === "admin" &&
+    Boolean(
+      await db.collection("schools").findOne({
+        id: schoolId
+      })
+    );
+  res.json({ role, setupComplete });
 };
