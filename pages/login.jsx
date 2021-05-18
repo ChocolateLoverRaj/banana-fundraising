@@ -50,7 +50,7 @@ const TeachersPage = () => {
 
   return (
     <>
-      {login ? (
+      {login?.role ? (
         <Result
           status="success"
           title="Already Logged In"

@@ -52,8 +52,6 @@ const CreatePage = () => {
     );
   };
 
-  console.log(created, +created, 1 + +created);
-
   return (
     <>
       <Steps current={1 + +created}>

@@ -66,9 +66,7 @@ const DashboardPage = () => {
                 type="circle"
                 width={48}
                 percent={(goal?.progress / goal?.goal) * 100}
-                format={(goal, progress) =>
-                  progress >= goal ? "Goal Reached" : "Great Start"
-                }
+                showInfo={false}
               />
             )}
           />

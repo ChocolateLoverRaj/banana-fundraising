@@ -16,8 +16,6 @@ const Header = () => {
     else if (key !== "logo") router.replace(key);
   };
 
-  console.log(login);
-
   return (
     <Menu
       mode="horizontal"
