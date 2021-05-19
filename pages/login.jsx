@@ -21,7 +21,7 @@ const TeachersPage = () => {
           router.replace(
             role === "admin" && !setupComplete ? "/create" : "/dashboard"
           );
-        } else {
+        } else if (res.status === 403) {
           setLogin(undefined);
           notification.error({
             message: "Error Logging In",
@@ -29,6 +29,16 @@ const TeachersPage = () => {
               "Your email address is not part of a Google Workspace.",
             duration: 10
           });
+        } else if (res.status === 404) {
+          setLogin(undefined);
+          notification.error({
+            message: "Error Logging In",
+            description: "Your school hasn't created a Banana Fundraiser.",
+            duration: 10
+          });
+        } else {
+          setLogin(undefined);
+          alert("Something went wrong when logging in.");
         }
         setLoginReq(undefined);
       })

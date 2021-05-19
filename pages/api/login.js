@@ -19,12 +19,27 @@ export default async (req, res) => {
   }
   const schoolId = await getId();
   const { db } = await getDb();
-  const setupComplete =
-    role === "admin" &&
-    Boolean(
-      await db.collection("schools").findOne({
-        id: schoolId
-      })
-    );
-  res.json({ role, setupComplete });
+  const schools = db.collection("schools");
+  const school = await schools.findOne({
+    id: schoolId
+  });
+  if (role === "student") {
+    if (!school) {
+      res.status(404).end();
+      return;
+    }
+    if (
+      school.students.find((student) => student.email === email) === undefined
+    ) {
+      await schools.updateOne(
+        { _id: school._id },
+        {
+          $push: { students: { email } }
+        }
+      );
+    }
+    res.json({ role });
+  } else {
+    res.json({ role, setupComplete: Boolean(school) });
+  }
 };

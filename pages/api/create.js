@@ -30,7 +30,8 @@ export default async (req, res) => {
   await schools.insertOne({
     id: demoId,
     goal: 10000,
-    goalProgress: 0
+    goalProgress: 0,
+    students: []
   });
   res.status(201).end();
 };
