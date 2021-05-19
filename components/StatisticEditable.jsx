@@ -1,49 +1,57 @@
-import { Statistic, InputNumber } from "antd";
+import { Statistic, InputNumber, Spin, Form } from "antd";
 import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 
 const StatisticEditable = (props) => {
-  const { loading, title, value, onChange, prefix } = props;
-
+  const { loading, title, value, onChange, prefix, changing, rules } = props;
+  const [form] = Form.useForm();
   const [editing, setEditing] = useState();
 
   const handleClickEdit = () => {
     setEditing(value);
   };
 
-  const formatter =
-    editing !== undefined
-      ? (value) => {
-          const handleChange = (value) => {
-            setEditing(value);
-          };
-          const handleBlur = () => {
-            onChange(editing);
-            setEditing(undefined);
-          };
-          return (
-            <InputNumber
-              autoFocus
-              onBlur={handleBlur}
-              value={value}
-              onChange={handleChange}
-            />
-          );
-        }
-      : undefined;
+  const formatter = (value) => {
+    const handleBlur = () => {
+      form.submit();
+    };
+    const handleFinish = ({ value }) => {
+      onChange(value);
+      setEditing(undefined);
+    };
+    return (
+      <>
+        {editing !== undefined ? (
+          <Form initialValues={{ value }} form={form} onFinish={handleFinish}>
+            <Form.Item name="value" rules={rules}>
+              <InputNumber
+                autoFocus
+                onBlur={handleBlur}
+                onPressEnter={handleBlur}
+              />
+            </Form.Item>
+          </Form>
+        ) : (
+          <span onDoubleClick={handleClickEdit}>{value}</span>
+        )}
+      </>
+    );
+  };
 
   return (
-    <Statistic
-      formatter={formatter}
-      title={
-        <>
-          {title} <EditOutlined onClick={handleClickEdit} />
-        </>
-      }
-      value={editing ?? value}
-      loading={loading}
-      prefix={prefix}
-    />
+    <Spin spinning={changing}>
+      <Statistic
+        formatter={formatter}
+        title={
+          <>
+            {title} <EditOutlined onClick={handleClickEdit} />
+          </>
+        }
+        value={editing ?? value}
+        loading={loading}
+        prefix={prefix}
+      />
+    </Spin>
   );
 };
 
