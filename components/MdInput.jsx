@@ -18,9 +18,13 @@ const MdInput = (props) => {
           <h2>Preview</h2>
         </Col>
       </Row>
-      <Row>
+      <Row style={{ height: "200px" }}>
         <Col span={12}>
-          <Input.TextArea value={value} onChange={handleChange} />
+          <Input.TextArea
+            value={value}
+            onChange={handleChange}
+            style={{ height: "100%" }}
+          />
         </Col>
         <Col span={12}>
           <Markdown>{value}</Markdown>
