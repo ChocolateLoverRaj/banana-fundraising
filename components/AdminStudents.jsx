@@ -6,15 +6,19 @@ const AdminStudents = (props) => {
   const loading = !school;
 
   return (
-    <Row>
+    <Row justify="space-between">
       <Col>
         <Statistic
           loading={loading}
           title="Students Logged In"
           value={school?.students.length}
         />
-        <Statistic loading={loading} title="Emails Sent" value={0} />
-        <Statistic loading={loading} title="Donations" value={0} />
+        <Col>
+          <Statistic loading={loading} title="Emails Sent" value={0} />
+        </Col>
+        <Col>
+          <Statistic loading={loading} title="Donations" value={0} />
+        </Col>
       </Col>
     </Row>
   );
