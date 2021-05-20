@@ -4,3 +4,4 @@ export { default as DashboardButton } from "./DashboardButton";
 export { default as StatisticEditable } from "./StatisticEditable";
 export { default as Goal } from "./Goal";
 export { default as AdminStudents } from "./AdminStudents";
+export { default as StudentEmails } from "./StudentEmails";

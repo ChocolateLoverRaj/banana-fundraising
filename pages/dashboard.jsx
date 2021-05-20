@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../helpers";
-import { Goal, AdminStudents } from "../components";
+import { Goal, AdminStudents, StudentEmails } from "../components";
 
 const DashboardPage = () => {
   const [login] = useContext(GlobalContext);
@@ -36,6 +36,7 @@ const DashboardPage = () => {
     <>
       <h1>Dashboard Page</h1>
       <h2>School Progress</h2>
+      {!isAdmin && <StudentEmails />}
       <Goal school={school} onChange={setSchool} />
       {isAdmin && <AdminStudents school={school} />}
     </>
