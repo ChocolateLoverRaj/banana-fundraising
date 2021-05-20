@@ -21,19 +21,19 @@ const StudentEmails = (props) => {
       </Row>
       <Modal visible={creating} title="New Email" okText="Send">
         <Form>
-          <Form.Input name="to" label="To" rules={[{ type: "email" }]}>
+          <Form.Item name="to" label="To" rules={[{ type: "email" }]}>
             <Input />
-          </Form.Input>
-          <Form.Input
+          </Form.Item>
+          <Form.Item
             name="subject"
             label="Subject"
             rules={[{ required: true }]}
           >
             <Input />
-          </Form.Input>
-          <Form.Input name="body">
+          </Form.Item>
+          <Form.Item name="body">
             <MdInput />
-          </Form.Input>
+          </Form.Item>
         </Form>
       </Modal>
     </>
