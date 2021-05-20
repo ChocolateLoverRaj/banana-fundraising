@@ -13,7 +13,8 @@ const AdminStudents = (props) => {
           title="Students Logged In"
           value={school?.students.length}
         />
-        <Statistic loading={loading} title="Total Emails Sent" value={0} />
+        <Statistic loading={loading} title="Emails Sent" value={0} />
+        <Statistic loading={loading} title="Donations" value={0} />
       </Col>
     </Row>
   );
