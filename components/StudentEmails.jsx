@@ -1,5 +1,6 @@
 import { Row, Col, Button, Modal, Form, Input } from "antd";
 import { useState } from "react";
+import { MdInput } from ".";
 
 const StudentEmails = (props) => {
   const [creating, setCreating] = useState(false);
@@ -30,7 +31,9 @@ const StudentEmails = (props) => {
           >
             <Input />
           </Form.Input>
-          <Form.Input name="body">H</Form.Input>
+          <Form.Input name="body">
+            <MdInput />
+          </Form.Input>
         </Form>
       </Modal>
     </>
