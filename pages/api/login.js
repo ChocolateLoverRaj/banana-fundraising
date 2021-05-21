@@ -34,7 +34,7 @@ export default async (req, res) => {
       await schools.updateOne(
         { _id: school._id },
         {
-          $push: { students: { email } }
+          $push: { students: { email, emails: [] } }
         }
       );
     }
