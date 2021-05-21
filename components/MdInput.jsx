@@ -19,14 +19,15 @@ const MdInput = (props) => {
         </Col>
       </Row>
       <Row style={{ height: "200px" }}>
-        <Col span={12}>
+        <Col span={12}
+            style={{ overflow: 'auto', maxHeight: '100%', resize: 'none' }}>
           <Input.TextArea
             value={value}
             onChange={handleChange}
-            style={{ height: "100%" }}
+            style={{height: '100%'}}
           />
         </Col>
-        <Col span={12}>
+        <Col span={12} style={{maxHeight: '100%', overflow: 'auto'}}>
           <Markdown>{value}</Markdown>
         </Col>
       </Row>

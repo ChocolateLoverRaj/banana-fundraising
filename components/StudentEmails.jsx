@@ -9,6 +9,10 @@ const StudentEmails = (props) => {
     setCreating(true);
   };
 
+  const handleCancel = () => {
+    setCreating(false)
+  }
+
   return (
     <>
       <Row justify="space-between">
@@ -19,9 +23,25 @@ const StudentEmails = (props) => {
           <Button onClick={handleNewEmail}>New Email</Button>
         </Col>
       </Row>
-      <Modal visible={creating} title="New Email" okText="Send">
+      <Modal 
+        visible={creating} 
+        title="New Email" 
+        okText="Send"
+        onCancel={handleCancel}
+      >
         <Form>
-          <Form.Item name="to" label="To" rules={[{ type: "email" }]}>
+          <Form.Item 
+            name={["to", "name"]} 
+            label="To - Name" 
+            rules={[{ type: "email", required: true }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item 
+            name={["to", "email"]} 
+            label="To - Email" 
+            rules={[{ type: "email", required: true }]}
+          >
             <Input />
           </Form.Item>
           <Form.Item
