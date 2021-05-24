@@ -1,4 +1,4 @@
-import { Row, Col, Button, Modal, Form, Input } from "antd";
+import { Row, Col, Button, Modal, Form, Input, Alert } from "antd";
 import { useState, useEffect, useContext } from "react";
 import { MdInput } from ".";
 import { GlobalContext } from '../helpers'
@@ -62,6 +62,12 @@ const StudentEmails = (props) => {
         confirmLoading={isLoading}
         onOk={handleOk}
       >
+        <Alert 
+          message='Emails will be sent from `testing@sparkpostbox.com`'
+          description={
+            <>The real website would use the <a target='_blank' href='https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send'>Gmail API</a>, but since the school has disabled it this website uses <a target='_blank' href='https://sparkpost.com'>Sparkpost</a> to send emails.
+            </>}
+        />
         <Form form={form}>
           <Form.Item 
             name={["to", "name"]} 
