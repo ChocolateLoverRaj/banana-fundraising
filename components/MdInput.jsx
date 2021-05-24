@@ -2,7 +2,7 @@ import { Row, Col, Input } from "antd";
 import Markdown from "react-markdown";
 
 const MdInput = (props) => {
-  const { value, onChange } = props;
+  const { value, onChange, disabled } = props;
 
   const handleChange = ({ target: { value } }) => {
     onChange?.(value);
@@ -25,6 +25,7 @@ const MdInput = (props) => {
             value={value}
             onChange={handleChange}
             style={{height: '100%'}}
+            disabled={disabled}
           />
         </Col>
         <Col span={12} style={{maxHeight: '100%', overflow: 'auto'}}>
