@@ -1,4 +1,4 @@
-import { Row, Col, Button, Modal, Form, Input, Alert } from "antd";
+import { Row, Col, Button, Modal, Form, Input, Alert, message } from "antd";
 import { useState, useEffect, useContext } from "react";
 import { MdInput } from ".";
 import { GlobalContext } from '../helpers'
@@ -12,7 +12,12 @@ const StudentEmails = (props) => {
   useEffect(() => {
     createReq
       ?.then(res => {
-        alert(res.status)
+        if (res.status === 201) {
+          setCreating(false)
+          message.success('Email Sent')
+        } else {
+          alert('Error sending email')
+        }
         setCreateReq(undefined)
       })
       .catch(() => {

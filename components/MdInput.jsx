@@ -30,6 +30,7 @@ const MdInput = (props) => {
         </Col>
         <Col span={12} style={{maxHeight: '100%', overflow: 'auto'}}>
           <Markdown>{value}</Markdown>
+          <a>Click Here To Donate</a>
         </Col>
       </Row>
     </>

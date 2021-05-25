@@ -4,6 +4,9 @@ import getDb from '../../helpers/db'
 import getId from '../../helpers/getId'
 import randomInt from '../../helpers/randomInt'
 import sparkPost from '../../helpers/sparkPost'
+import mdToHtml from 'marked'
+import * as sanitize from 'sanitize-html'
+import domain from '../../helpers/domain'
 
 const schema = {
   type: 'object',
@@ -83,7 +86,7 @@ export default async (req, res) => {
         email: 'testing@sparkpostbox.com'
       },
       subject: req.body.subject,
-      text: `Email id: ${emailId}`
+      html: `${sanitize(mdToHtml(req.body.message))}<br><a href="${domain}/donate?emailId=${emailId}">Click Here To Donate</a>`
     }
   })
   res.status(201).end()
