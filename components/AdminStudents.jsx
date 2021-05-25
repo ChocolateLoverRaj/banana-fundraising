@@ -5,6 +5,8 @@ const AdminStudents = (props) => {
 
   const loading = !school;
 
+  const totalEmails = school?.students.reduce((current, { emails }) => current + emails.length, 0)
+
   return (
     <Row justify="space-between">
       <Col>
@@ -15,7 +17,7 @@ const AdminStudents = (props) => {
         />
       </Col>
       <Col>
-        <Statistic loading={loading} title="Emails Sent" value={0} />
+        <Statistic loading={loading} title="Emails Sent" value={totalEmails} />
       </Col>
       <Col>
         <Statistic loading={loading} title="Donations" value={0} />

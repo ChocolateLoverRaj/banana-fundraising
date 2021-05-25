@@ -67,11 +67,6 @@ export default async (req, res) => {
   const emailId = randomInt()
   console.log(emailId)
   const studentIndex = school.students.findIndex(student => student.email = email)
-  await schools.updateOne({ _id: school._id }, {
-    $push: {
-      [`students.${studentIndex}.emails`]: { id: emailId }
-    }
-  })
   await sparkPost.transmissions.send({
     options: {
       sandbox: true
@@ -87,6 +82,11 @@ export default async (req, res) => {
       },
       subject: req.body.subject,
       html: `${sanitize(mdToHtml(req.body.message))}<br><a href="${domain}/donate?emailId=${emailId}">Click Here To Donate</a>`
+    }
+  })
+  await schools.updateOne({ _id: school._id }, {
+    $push: {
+      [`students.${studentIndex}.emails`]: { id: emailId }
     }
   })
   res.status(201).end()
