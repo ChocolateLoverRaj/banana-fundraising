@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { Input, Alert } from 'antd'
+import * as sanitize from 'sanitize-html'
 
 const EmailPage = () => {
   const { query: { from, subject, to, body } } = useRouter()
@@ -7,9 +8,9 @@ const EmailPage = () => {
   return (
     <>
       <Alert message={<>Viewing demo email of <b>{to}</b></>} />
-      <Input addonBefore='From' value={from} />
-      <Input addonBefore='Subject' value={subject} />
-      {body}
+      <Input addonBefore='From' defaultValue={from} readOnly bordered={false} />
+      <Input addonBefore='Subject' defaultValue={subject} readOnly bordered={false} />
+      <div dangerouslySetInnerHTML={sanitize(body)} />
     </>
   )
 }
