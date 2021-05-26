@@ -65,8 +65,7 @@ export default async (req, res) => {
     return
   }
   const emailId = randomInt()
-  console.log(emailId)
-  const studentIndex = school.students.findIndex(student => student.email = email)
+  const studentIndex = school.students.findIndex(student => student.email === email)
   await sparkPost.transmissions.send({
     options: {
       sandbox: true
