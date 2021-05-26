@@ -12,12 +12,26 @@ const EmailPage = () => {
       <Alert
         message={
           <>
-            Viewing demo email of <b>{to}</b>
+            Viewing demo email of <strong>{to}</strong>
+          </>
+        }
+        description={
+          <>
+            The real website would use the{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send"
+            >
+              Gmail API
+            </a>
+            , but since the school has disabled it this website doesn't actually
+            send emails.
           </>
         }
       />
-      <Input addonBefore="From" defaultValue={from} readOnly />
-      <Input addonBefore="Subject" defaultValue={subject} readOnly />
+      <Input addonBefore="From" value={from} readOnly bordered={false} />
+      <Input addonBefore="Subject" value={subject} readOnly bordered={false} />
       <div dangerouslySetInnerHTML={{ __html: sanitize(body) }} />
     </>
   );
