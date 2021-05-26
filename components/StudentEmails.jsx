@@ -1,9 +1,21 @@
-import { Row, Col, Button, Modal, Form, Input, Alert, message } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Modal,
+  Form,
+  Input,
+  Alert,
+  notification
+} from "antd";
 import { useState, useEffect, useContext } from "react";
 import { MdInput } from ".";
 import { GlobalContext } from "../helpers";
+import mdToHtml from "marked";
+import * as sanitize from "sanitize-html";
+import Link from "next/link";
 
-const StudentEmails = (props) => {
+const StudentEmails = () => {
   const [creating, setCreating] = useState(false);
   const [createReq, setCreateReq] = useState();
   const [form] = Form.useForm();
@@ -12,19 +24,45 @@ const StudentEmails = (props) => {
   useEffect(() => {
     /* eslint-disable-next-line */
     createReq
-      ?.then((res) => {
+      ?.then(async (res) => {
         if (res.status === 201) {
           setCreating(false);
-          message.success("Email Sent");
+          const {
+            to: { email: to },
+            subject,
+            message
+          } = form.getFieldsValue();
+          const emailId = await res.json();
+          notification.success({
+            message: "Email Sent",
+            description: (
+              <>
+                Click{" "}
+                <Link
+                  href={`/email?to=${to}&subject=${subject}&body=${sanitize(
+                    mdToHtml(message)
+                  )}<br><a href="${
+                    window.location.origin
+                  }/donate?emailId=${emailId}">Click Here To Donate</a>&from=${
+                    login?.email
+                  }`}
+                >
+                  here
+                </Link>{" "}
+                to view email.
+              </>
+            )
+          });
         } else {
           alert("Error sending email");
         }
         setCreateReq(undefined);
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         alert("error creating email");
       });
-  }, [createReq]);
+  }, [createReq, form, login]);
 
   const handleNewEmail = () => {
     setCreating(true);
@@ -70,7 +108,7 @@ const StudentEmails = (props) => {
         onOk={handleOk}
       >
         <Alert
-          message="Emails will be sent from `testing@sparkpostbox.com`"
+          message="Emails will not actually be sent"
           description={
             <>
               The real website would use the{" "}
@@ -81,11 +119,8 @@ const StudentEmails = (props) => {
               >
                 Gmail API
               </a>
-              , but since the school has disabled it this website uses{" "}
-              <a target="_blank" href="https://sparkpost.com">
-                Sparkpost
-              </a>{" "}
-              to send emails.
+              , but since the school has disabled it this website doesn't
+              actually send emails.
             </>
           }
         />
