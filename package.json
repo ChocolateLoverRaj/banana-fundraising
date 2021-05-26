@@ -22,7 +22,6 @@
     "react-google-button": "0.7.2",
     "react-markdown": "6.0.2",
     "sanitize-html": "^2.4.0",
-    "sparkpost": "^2.1.4",
     "use-local-storage": "2.2.1",
     "validate-email": "1.0.0"
   },
