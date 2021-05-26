@@ -30,8 +30,8 @@ const EmailPage = () => {
           </>
         }
       />
-      <Input addonBefore="From" value={from} readOnly bordered={false} />
-      <Input addonBefore="Subject" value={subject} readOnly bordered={false} />
+      <Input addonBefore="From" value={from} readOnly />
+      <Input addonBefore="Subject" value={subject} readOnly />
       <div dangerouslySetInnerHTML={{ __html: sanitize(body) }} />
     </>
   );
