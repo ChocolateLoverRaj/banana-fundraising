@@ -10,7 +10,7 @@ const EmailPage = () => {
       <Alert message={<>Viewing demo email of <b>{to}</b></>} />
       <Input addonBefore='From' defaultValue={from} readOnly bordered={false} />
       <Input addonBefore='Subject' defaultValue={subject} readOnly bordered={false} />
-      <div dangerouslySetInnerHTML={sanitize(body)} />
+      <div dangerouslySetInnerHTML={{__html: sanitize(body)}} />
     </>
   )
 }
