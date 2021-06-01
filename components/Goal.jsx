@@ -41,50 +41,57 @@ const Goal = (props) => {
   const loading = !Boolean(school);
 
   return (
-    <Row justify="space-between">
-      <Col>
-        {login?.role === "admin" ? (
-          <StatisticEditable
-            loading={loading}
-            title="Goal"
-            prefix="$"
-            value={school?.goal}
-            onChange={handleChange}
-            changing={Boolean(editSchoolPromise)}
-            rules={[{ type: "number", min: 1 }]}
-          />
-        ) : (
-          <Statistic
-            loading={loading}
-            prefix="$"
-            title="Goal"
-            value={school?.goal}
-          />
-        )}
-      </Col>
-      <Col>
-        <Statistic
-          loading={loading}
-          title="Money Raised"
-          prefix="$"
-          value={school?.goalProgress}
-        />
-      </Col>
-      <Col>
-        <Statistic
-          loading={loading}
-          title="Goal Progress"
-          formatter={() => (
-            <Progress
-              type="circle"
-              width={48}
-              percent={(school?.goalProgress / school?.goal) * 100}
-              showInfo={false}
+    <>
+      <Row>
+        <Col>
+          <h2>Goal for {school?.name}</h2>
+        </Col>
+      </Row>
+      <Row justify="space-between">
+        <Col>
+          {login?.role === "admin" ? (
+            <StatisticEditable
+              loading={loading}
+              title="Goal"
+              prefix="$"
+              value={school?.goal}
+              onChange={handleChange}
+              changing={Boolean(editSchoolPromise)}
+              rules={[{ type: "number", min: 1 }]}
+            />
+          ) : (
+            <Statistic
+              loading={loading}
+              prefix="$"
+              title="Goal"
+              value={school?.goal}
             />
           )}
-        />
-      </Col>
-    </Row>
+        </Col>
+        <Col>
+          <Statistic
+            loading={loading}
+            title="Money Raised"
+            prefix="$"
+            value={school?.goalProgress}
+          />
+        </Col>
+        <Col>
+          <Statistic
+            loading={loading}
+            title="Goal Progress"
+            formatter={() => (
+              <Progress
+                type="circle"
+                width={48}
+                percent={(school?.goalProgress / school?.goal) * 100}
+                showInfo={false}
+              />
+            )}
+          />
+        </Col>
+      </Row>
+    </>
   );
 };
 

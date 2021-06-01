@@ -1,4 +1,13 @@
-import { Steps, notification, Row, Col, Form, Button, Result } from "antd";
+import {
+  Steps,
+  notification,
+  Row,
+  Col,
+  Form,
+  Button,
+  Result,
+  Input
+} from "antd";
 import {
   UserOutlined,
   SettingOutlined,
@@ -27,6 +36,7 @@ const CreatePage = () => {
   }, [login, router]);
 
   useEffect(() => {
+    // eslint-disable-next-line
     creating
       ?.then((res) => {
         setCreating(undefined);
@@ -41,13 +51,17 @@ const CreatePage = () => {
         console.log(e);
         alert("Error creating fundraiser");
       });
-  }, [creating]);
+  }, [creating, setLogin]);
 
-  const handleSubmit = () => {
+  const handleSubmit = ({ name }) => {
     setCreating(
       fetch("/api/create", {
         method: "POST",
-        body: login.email
+        body: JSON.stringify({
+          email: login.email,
+          name
+        }),
+        headers: [["Content-Type", "application/json"]]
       })
     );
   };
@@ -69,6 +83,13 @@ const CreatePage = () => {
             />
           ) : (
             <Form initialValues={{ tos: false }} onFinish={handleSubmit}>
+              <Form.Item
+                label="School Name"
+                name="name"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
               <Form.Item label="Teachers">
                 The real website would use the{" "}
                 <a

@@ -1,13 +1,35 @@
 import getRole from "../../helpers/getRole";
 import getDb from "../../helpers/db";
 import getId from "../../helpers/getId";
+import Ajv from "ajv";
+
+const schema = {
+  type: "object",
+  properties: {
+    email: {
+      type: "string",
+      minLength: 1
+    },
+    name: {
+      type: "string",
+      minLength: 1
+    }
+  },
+  required: ["email", "name"]
+};
 
 export default async (req, res) => {
   if (req.method !== "POST") {
     res.status(503).end();
     return;
   }
-  const email = req.body.toLowerCase();
+  const ajv = new Ajv();
+  const valid = ajv.validate(schema, req.body);
+  if (!valid) {
+    res.status(400).json(ajv.errors);
+    return;
+  }
+  const email = req.body.email.toLowerCase();
   if (email === "") {
     res.status(400).end();
     return;
@@ -31,7 +53,8 @@ export default async (req, res) => {
     id: demoId,
     goal: 10000,
     goalProgress: 0,
-    students: []
+    students: [],
+    name: req.body.name
   });
   res.status(201).end();
 };

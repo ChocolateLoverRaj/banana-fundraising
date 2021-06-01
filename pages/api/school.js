@@ -4,8 +4,8 @@ import getRole from "../../helpers/getRole";
 import Ajv from "ajv";
 
 const keys = {
-  student: new Set().add("goal").add("goalProgress"),
-  admin: new Set().add("goal").add("goalProgress").add("students")
+  student: new Set().add("goal").add("goalProgress").add("name"),
+  admin: new Set().add("goal").add("goalProgress").add("students").add("name")
 };
 
 const patchSchema = {
