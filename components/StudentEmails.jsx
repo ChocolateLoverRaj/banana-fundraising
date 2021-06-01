@@ -38,7 +38,7 @@ const StudentEmails = () => {
             description: (
               <>
                 Click{" "}
-                <Link
+                <a
                   href={`/email?to=${to}&subject=${subject}&body=${sanitize(
                     mdToHtml(message)
                   )}<br><a href="${
@@ -46,9 +46,11 @@ const StudentEmails = () => {
                   }/donate?emailId=${emailId}">Click Here To Donate</a>&from=${
                     login?.email
                   }`}
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   here
-                </Link>{" "}
+                </a>{" "}
                 to view email.
               </>
             )

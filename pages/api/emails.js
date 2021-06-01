@@ -64,6 +64,10 @@ export default async (req, res) => {
   const studentIndex = school.students.findIndex(
     (student) => student.email === email
   );
+  if (studentIndex === -1) {
+    res.status(403).end();
+    return;
+  }
   await schools.updateOne(
     { _id: school._id },
     {
