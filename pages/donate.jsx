@@ -31,15 +31,15 @@ const DonatePage = () => {
           return;
         }
         if (res.status !== 200) {
-          alert("Error getting school name");
+          alert("Error getting school name" + res.status);
           return;
         }
         const schoolName = await res.json();
         if (canceled) return;
         setSchoolName(schoolName);
       })
-      .catch(() => {
-        alert("Error getting school name");
+      .catch((e) => {
+        alert("Error getting school name" + e.message);
       });
   }, [fetchPromise]);
 
