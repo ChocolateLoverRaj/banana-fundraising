@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.6.2",
+    "@stripe/react-stripe-js": "1.4.1",
+    "@stripe/stripe-js": "1.15.0",
     "ajv": "8.4.0",
     "antd": "4.15.5",
     "less": "4.1.1",
@@ -22,6 +24,7 @@
     "react-google-button": "0.7.2",
     "react-markdown": "6.0.2",
     "sanitize-html": "^2.4.0",
+    "stripe": "8.150.0",
     "use-local-storage": "2.2.1",
     "validate-email": "1.0.0"
   },
