@@ -5,7 +5,8 @@ export default async (req, res) => {
     res.status(405).end();
     return;
   }
-  const { emailId } = req.query;
+  // eslint-disable-next-line
+  const emailId = parseInt(req.query.emailId);
   if (!Number.isInteger(emailId)) {
     res.status(400).end();
     return;

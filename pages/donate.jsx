@@ -4,7 +4,8 @@ import { Result } from "antd";
 
 const DonatePage = () => {
   const router = useRouter();
-  const { emailId } = router.query;
+  // eslint-disable-next-line
+  const emailId = parseInt(router.query.emailId);
   const [fetchPromise, setFetchPromise] = useState();
   const [invalid, setInvalid] = useState(false);
   const [schoolName, setSchoolName] = useState();
@@ -16,8 +17,8 @@ const DonatePage = () => {
   }, [emailId, router]);
 
   useEffect(() => {
-    setFetchPromise(fetch(`/api/donate?emailId=${emailId}`));
-  }, [emailId]);
+    if (!invalid) setFetchPromise(fetch(`/api/donate?emailId=${emailId}`));
+  }, [emailId, invalid]);
 
   useEffect(() => {
     let canceled = false;
