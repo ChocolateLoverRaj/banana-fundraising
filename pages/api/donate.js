@@ -13,11 +13,11 @@ export default async (req, res) => {
   }
   const { db } = await getDb();
   const school = await db.collection("schools").findOne({
-    students: { $in: { emails: { $in: { id: emailId } } } }
+    students: { $elemMatch: { emails: { $elemMatch: { id: emailId } } } }
   });
   if (!Boolean(school)) {
     res.status(404).end();
     return;
   }
-  res.status(200).end();
+  res.end(JSON.stringify(school.name));
 };

@@ -7,13 +7,11 @@ const DonatePage = () => {
   // eslint-disable-next-line
   const emailId = parseInt(router.query.emailId);
   const [fetchPromise, setFetchPromise] = useState();
-  const [invalid, setInvalid] = useState(!Number.isInteger(emailId));
+  const [invalid, setInvalid] = useState(false);
   const [schoolName, setSchoolName] = useState();
 
   useEffect(() => {
-    if (!Number.isInteger(emailId)) {
-      setInvalid(true);
-    }
+    setInvalid(!Number.isInteger(emailId))
   }, [emailId]);
 
   useEffect(() => {
