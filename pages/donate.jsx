@@ -17,7 +17,7 @@ const DonatePage = () => {
   }, [emailId, router]);
 
   useEffect(() => {
-    alert(emailId + " " + router.query.emailId);
+    alert(emailId + " " + invalid);
     if (!invalid) setFetchPromise(fetch(`/api/donate?emailId=${emailId}`));
   }, [emailId, invalid]);
 
